@@ -1,4 +1,4 @@
-package Dijkstra;
+package DijkstraFor743;
 
 import java.util.LinkedList;
 import java.util.List;
