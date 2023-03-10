@@ -98,12 +98,12 @@ void mergesort(vector<int>& arr, int left, int right) {
     }
 }
 
-void heapify(vector<int>& arr, int heapsize, int i) { // 把最大的结点放在后面 建立的是小根堆
+void heapify(vector<int>& arr, int heapsize, int i) { 
     if(i >= heapsize) return ;
     int left = i * 2 ;
     int right = i * 2 + 1;
     int largest = i;
-    if(left < heapsize && arr[left] > arr[largest]) {
+    if(left < heapsize && arr[left] > arr[largest]) { // 把最大的结点放在前面 建立的是大根堆（比左右节点都大）
         largest = left;
     }
     if(right < heapsize && arr[right] > arr[largest]) {
