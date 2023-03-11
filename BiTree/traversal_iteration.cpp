@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 #include "TreeNode.cpp"
 typedef TreeNode node;
 using namespace std;
@@ -52,7 +53,24 @@ public:
             s2.pop();
         }
     }
+
+    void levelTraversal(node* root){
+        if(root == nullptr) return ;
+        queue<node *> q;
+        q.push(root);
+        while(!q.empty()) {
+            int sz = q.size();
+            for(int i = 0; i < sz; ++i) {
+                node* n = q.front();
+                q.pop();
+                cout << n->val << " ";
+                if(n->left != nullptr) q.push(n->left);
+                if(n->right != nullptr) q.push(n->right);
+            }
+        }
+    }
 };
+
 
 int main() {
     TreeNode* root = new TreeNode(1);
@@ -75,6 +93,11 @@ int main() {
     cout << "后序遍历结果为：";
     solution.postOrderTraversal(root);
     cout << endl;
+
+    cout << "层次遍历结果为：";
+    solution.levelTraversal(root);
+    cout << endl;
+
 
     return 0;
 }
