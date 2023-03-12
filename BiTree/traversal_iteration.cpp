@@ -1,52 +1,56 @@
-#include <iostream>
 #include <stack>
+#include <iostream>
 #include <queue>
 #include "TreeNode.cpp"
-typedef TreeNode node;
 using namespace std;
 
-class BinaryTreeTraversal{
+class Traversal{
 public:
-    void preOrderTraversal(node* root) {
+    void preOrder(TreeNode* root) {
         if(root == nullptr) return ;
-        stack<node*> s;
-        s.push(root);
-        while(!s.empty()) {
-            node* n = s.top();
-            s.pop();
-            cout << n->val << " ";
-            if(n->right != nullptr) s.push(n->right);
-            if(n->left != nullptr) s.push(n->left);
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty()) {
+            TreeNode* curNode = st.top();
+            st.pop();
+            cout << curNode->val << " ";
+            if(curNode->right != nullptr) st.push(curNode->right);
+            if(curNode->left != nullptr) st.push(curNode->left);
         }
     }
-    
-    void inOrderTraversal(node* root) {
+
+    void inOrder(TreeNode* root) {
         if(root == nullptr) return ;
-        stack<node*> s;
-        node* n = root;
-        while(!s.empty() || n != nullptr) {
-            if(n != nullptr) {
-                s.push(n);
+        stack<TreeNode*> st;
+        TreeNode* n = root;
+        while(!st.empty() || n != nullptr) {
+            if(n != nullptr) { // 重点注意:不能判断n->left != nullptr 因为n可能为空
+                // 说明左子树还没有遍历完，不能访问
+                // 不能访问也就是指不能pop 只能push(遍历)
+                st.push(n);
                 n = n->left;
             }else {
-                n = s.top();
-                s.pop();
+                // 说面左子树已经遍历完，可以访问
+                n = st.top();
+                st.pop();
                 cout << n->val << " ";
-                n = n->right;
+                // 访问完根节点以后，再遍历右子树
+                n = n->right;  
             }
         }
     }
 
-    void postOrderTraversal(node* root) {
+    void postOrder(TreeNode* root) {
         if(root == nullptr) return ;
-        stack<node*> s1, s2;
+        // 后序遍历就是前序遍历的倒序，通过栈倒置一下顺序就好
+        stack<TreeNode*> s1, s2;
         s1.push(root);
         while(!s1.empty()) {
-            node* n = s1.top();
+            TreeNode* curNode = s1.top();
             s1.pop();
-            s2.push(n);
-            if(n->right != nullptr) s1.push(n->right);
-            if(n->left != nullptr) s1.push(n->left);
+            s2.push(curNode);
+            if(curNode->right != nullptr) s1.push(curNode->right);
+            if(curNode->left != nullptr) s1.push(curNode->left);
         }
         while(!s2.empty()) {
             cout << s2.top()->val << " ";
@@ -54,14 +58,14 @@ public:
         }
     }
 
-    void levelTraversal(node* root){
+    void levelTraversal(TreeNode* root){
         if(root == nullptr) return ;
-        queue<node *> q;
+        queue<TreeNode *> q;
         q.push(root);
         while(!q.empty()) {
             int sz = q.size();
             for(int i = 0; i < sz; ++i) {
-                node* n = q.front();
+                TreeNode* n = q.front();
                 q.pop();
                 cout << n->val << " ";
                 if(n->left != nullptr) q.push(n->left);
@@ -71,7 +75,6 @@ public:
     }
 };
 
-
 int main() {
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
@@ -80,24 +83,28 @@ int main() {
     root->left->right = new TreeNode(5);
     root->right->right = new TreeNode(6);
 
-    BinaryTreeTraversal solution;
+    Traversal solution;
 
     cout << "前序遍历结果为：";
-    solution.preOrderTraversal(root);
+    solution.preOrder(root);
     cout << endl;
 
     cout << "中序遍历结果为：";
-    solution.inOrderTraversal(root);
+    solution.inOrder(root);
     cout << endl;
 
     cout << "后序遍历结果为：";
-    solution.postOrderTraversal(root);
+    solution.postOrder(root);
     cout << endl;
 
     cout << "层次遍历结果为：";
     solution.levelTraversal(root);
     cout << endl;
 
-
     return 0;
 }
+
+// 前序遍历结果为：1 2 4 5 3 6 
+// 中序遍历结果为：4 2 5 1 3 6 
+// 后序遍历结果为：6 3 5 4 2 1 
+// 层次遍历结果为：1 2 3 4 5 6 
