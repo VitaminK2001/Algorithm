@@ -6,6 +6,11 @@
         "vector": "cpp",
         "queue": "cpp",
         "iostream": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp",
+        "iosfwd": "cpp",
+        "stack": "cpp",
+        "__node_handle": "cpp"
     }
 }

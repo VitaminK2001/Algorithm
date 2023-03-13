@@ -102,6 +102,7 @@ public:
             }else {
                 // 如果是第一次访问，重新放回等待第二次访问
                 st.emplace(node, true); 
+                // 因为是后序遍历，所以是从右到左的顺序，所以放入栈的时候是从左到右
                 for(int i = 0; i < node->children.size(); ++i) {
                     st.emplace(node->children[i], false);
                 }
