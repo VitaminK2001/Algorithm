@@ -130,9 +130,37 @@ void heapsort(vector<int>& arr, int heapsize) {
     }
 }
 
+/* 希尔排序法 */
+void shellsort(vector<int>& arr, int n) {
+    for(int gap = n / 2; gap > 0; gap /= 2) { // gap终究变成1
+        for(int i = gap; i < n; ++i) {
+            int j = i;
+            while(j - gap >= 0 && arr[j] < arr[j-gap]) {
+                swap(arr[j], arr[j-gap]);
+                j -= gap;
+            }
+        }
+    }
+}
+
+void shellsort2(vector<int>& arr, int n) {
+    for(int gap = n / 2; gap > 0; gap /= 2) {
+        for(int i = gap; i < n; ++i) {
+            int j = i - gap;
+            int target = arr[i];
+            while(j >= 0 && target < arr[j]) {
+                arr[j+gap] = arr[j];
+                j -= gap;
+            }
+            arr[j+gap] = target;
+        }
+    }
+}
+
+
 
 int main() {
-    vector<int> arr = {5, 2, 8, 4, 7, 1, 9, 3, 10, 6};
+    vector<int> arr = {5, 2, 8, 4, 7, 1, 9, 3, 10, 6, 22, 41, 27, 35, 60, 22, 33, 87};
     int n = arr.size();
 
     // 打印原始数组
@@ -143,7 +171,7 @@ int main() {
     cout << endl;
 
     // 调用快速排序函数
-    heapsort(arr, n);
+    shellsort2(arr, n);
 
     // 打印排序后的数组
     cout << "Sorted array: ";
