@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 
+// 插入排序的交换版本
 void insertionsort(int arr[], int n) {
     int i, j;
     for(i = 1; i < n; ++i) {
@@ -13,6 +14,20 @@ void insertionsort(int arr[], int n) {
     }
 }
 
+// 插入排序的非交换版本
+void insertionsort2(vector<int>& arr, int n) {      
+    int i, j;
+    for(i = 1; i < n; ++i) {
+        int target = arr[i];
+        j = i;
+        while(j > 0 && arr[j-1] > target) {
+            arr[j] = arr[j-1];
+            --j;
+        }
+        arr[j] = target;
+    }
+}
+
 void quicksort(int arr[], int left, int right) {
     if(left >= right) return ;
     int pivot = right;
@@ -20,7 +35,7 @@ void quicksort(int arr[], int left, int right) {
     int start = left;
     int end = right;
     while(left < right) {
-        while(left < right && arr[left] < arr[pivot]) {
+        while(left < right && arr[left] < arr[pivot]) { // 这样left停下来的位置就是大于等于的数字，即使j没找到小于的数字，j和i碰头后 交换的也是正确的
             left++;
         }
         while(left < right && arr[right] >= arr[pivot]) {
@@ -170,8 +185,7 @@ int main() {
     }
     cout << endl;
 
-    // 调用快速排序函数
-    shellsort2(arr, n);
+    insertionsort2(arr, n);
 
     // 打印排序后的数组
     cout << "Sorted array: ";
