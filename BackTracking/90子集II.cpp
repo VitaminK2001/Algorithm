@@ -68,18 +68,50 @@ public:
     void dfs(vector<int>& nums, int pos, int n) {
         // 每次延展树枝 都需要保存当前的子集
         res.push_back(path);
-        for(int i = pos; i < n; ++i) {
+        for(int i = pos; i < n; ++i) { // 之所以用for循环是因为 每次进入递归函数的时候都是从当前的位置往后看，看的是待选的元素
             if(i > 0 && nums[i] == nums[i-1] && used[i-1] == false){
                 continue;
             }
             // 遍历之前打开开关 让同一条树枝上的相同元素可以选入
             used[i] = true;
-            path.push_back(nums[i]);
-            dfs(nums, i+1, n);
-            path.pop_back();
+            path.push_back(nums[i]); //进入下一层的状态
+            dfs(nums, i+1, n); // 只要进入到下一层 之前的数都不能用
+            path.pop_back(); //回到当前层的状态
             // 遍历之后关闭开关 表示相同元素的第一个已经用完了 同一树层的相同元素没有必要再延展成树枝
             used[i] = false;
         }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        used.assign(n, false);
+        dfs(nums, 0, n);
+        return res;
+    }
+};
+
+// 写成没有for循环版本的可以吗？
+class Solution3 {
+public:
+    vector<int> path;
+    vector<vector<int>> res;
+    vector<bool> used;
+    void dfs(vector<int>& nums, int pos, int n) {
+        if(pos >= n) return ;
+        // 如果不选，则pos+?
+        int i = pos;
+        while(i > 0 && nums[i] == nums[i-1] && used[i-1] == true){
+            i++;
+        }
+        dfs(nums, i, n);
+
+        // 如果选择，进入下一层前，为了防止后面的数和之前的数相同
+        // 需要做个标记，表示允许可以选
+        used[pos] = true;
+        path.emplace_back(nums[pos]);
+        dfs(nums, pos+1, n);
+        path.pop_back();
+        used[pos] = false;
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         int n = nums.size();
