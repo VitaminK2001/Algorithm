@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+/* 线性表的链式表示 */
 typedef struct Lnode{
     int data;
     struct Lnode *next;

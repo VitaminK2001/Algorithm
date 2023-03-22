@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 #define maxsize 50
-/* 线性表 */
+/* 线性表的顺序表示 */
 typedef struct SqList{
     int *data; // 动态分配不是链式存储 ，依然是随机存储方式，只是分配的空间大小可以在运行时动态决定
     int length;
