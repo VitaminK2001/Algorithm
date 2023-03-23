@@ -1,11 +1,13 @@
 #include <iostream>
 using namespace std;
+
 void printList(int a[], int n) {
     for(int i = 0; i < n; ++i) {
         cout << a[i] << " ";
     }
     cout << endl;
 }
+
 int main() {
     /*              静态数组               */
     int a1[3]; // 1 58395696 1 
@@ -23,6 +25,7 @@ int main() {
     cout << "a1 : " << endl;
     printList(a1, 3); // 0 0 0
 
+    int a3[][3] = {1,2,3,4,5,6}; //静态二维数组定义 至少要指定列值 指定了3列后 系统自动分配2行
 
 
 
@@ -82,14 +85,39 @@ int main() {
     // new 在动态分配类类型时，会调用类的构造函数，对内存空间进行初始化；
     // 在动态分配内置类型时，是否初始化取决于后面有没有括号（）
     int *arr4 = new int[3]{1,2,3};
-    cout << " arr4 : " << endl;
+    cout << "arr4 : " << endl;
     printList(arr4, 3);
     int *arr5 = new int[4]{}; // 初始化 
     int *arr6 = new int[4](); // 显式初始化
     int *arr7 = new int[3]; // 不初始化
-    cout << " arr7 : " << endl;
+    cout << "arr7 : " << endl;
     printList(arr7, 3);
+
 
     // new申请到的空间是连续的
     cout << &arr4[0] << "  " << &arr4[1] << endl;
+
+
+
+    /*                  指针数组 和 数组指针的 初始化                  */
+    int *pr[4]; // 指针数组  相当于 (int *)pr[4]
+    // 可以看做行数为4 列数不定的数组
+    pr[0] = (int*)malloc(sizeof(int)*10);
+    cout << "pr 第一行的十个元素为 : " << endl;
+    printList(pr[0], 10);
+    
+    int (*pr2)[4] = new int[3][4]; // 表示数组指针
+    // 可以看做列数为4，行数不定的数组
+    pr2 = (int[2][4]){{2},{3}};  // 没有写的默认初始化为0
+    // for(int i = 0; i < 3; ++i) {
+    //     pr2[i] = new int[4];
+    // }
+    cout << "pr2 第一行的四个元素为 : " << endl;
+    printList(pr2[0], 4);
+    cout << "pr2 第二行的四个元素为 : " << endl;
+    printList(pr2[1], 4);
+    cout << "pr2 第三行的四个元素为 : " << endl;
+    printList(pr2[2], 4);
+
+
 }
