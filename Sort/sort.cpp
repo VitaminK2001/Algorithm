@@ -28,14 +28,19 @@ void insertionsort2(vector<int>& arr, int n) {
     }
 }
 
+// 快速排序 排枢纽 注意pivot等于right先找大于等于 pivot等于left先找小于等于
 void quicksort(int arr[], int left, int right) {
+    // 注意递归函数的终止条件是当只剩下一个元素的时候不拆分
     if(left >= right) return ;
     int pivot = right;
     // 注意需要保留排序的区间开始和结束的下标
     int start = left;
     int end = right;
     while(left < right) {
-        while(left < right && arr[left] < arr[pivot]) { // 这样left停下来的位置就是大于等于的数字，即使j没找到小于的数字，j和i碰头后 交换的也是正确的
+        // 因为pivot = right 所以首先找大于等于pivot的数字 即小于pivot数 直接跳过
+        // 这样left停下来的位置就是大于等于的数字，即使right没找到小于的数字，
+        // right和left碰头后 left和 pivot交换之后 大于pivot的数也正确的移动到pivot的右边
+        while(left < right && arr[left] < arr[pivot]) { 
             left++;
         }
         while(left < right && arr[right] >= arr[pivot]) {
@@ -49,6 +54,7 @@ void quicksort(int arr[], int left, int right) {
     quicksort(arr, left+1, end);
 }
 
+// 冒泡排序 从后往前 每次将最大的挪到最后面
 void bubblesort(int arr[], int n) {
     int i, j;
     for(i = n-1; i > 0; --i) {
@@ -63,6 +69,7 @@ void bubblesort(int arr[], int n) {
     }
 }
 
+// 选择排序 从头开始 选择未排序的序列中最小的数插入到已排序的序列的末尾
 void selectionsort(int arr[], int n) {
     int i, j;
     for(i = 0; i < n-1; ++i) {
@@ -76,6 +83,7 @@ void selectionsort(int arr[], int n) {
     }
 }
 
+// 归并排序 左中右
 void merge(vector<int>& arr, int left, int middle, int right) {
     int n1 = middle - left + 1;
     int n2 = right - middle;
