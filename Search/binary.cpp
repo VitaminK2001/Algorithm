@@ -72,7 +72,7 @@ int binarySearchUpperBound(vector<int>& arr, int target) {
     int left = 0, right = n;
     while(left < right) {
         int mid = (left + right) >> 1;
-        if(arr[mid] <= target) { // 寻找最后一个大于等于的
+        if(arr[mid] <= target) { // 寻找第一个大于的
             left = mid+1;
         }else { // left的位置永远是小于等于的
             right = mid;
@@ -83,8 +83,8 @@ int binarySearchUpperBound(vector<int>& arr, int target) {
 
 
 int main() {
-    vector<int> arr = {1, 3, 4, 6, 6, 6, 6, 8, 9, 11, 11, 12};
-    int target = 4;
+    vector<int> arr = {1, 3, 4, 6, 6, 6, 6, 6, 7, 8, 9, 11, 11, 12};
+    int target = 6;
 
     int lower = binarySearchLowerBound(arr, target);
 
