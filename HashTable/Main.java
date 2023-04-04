@@ -27,9 +27,9 @@ class Solution {
     }
 };
 
-public class 最长连续序列 {
+public class Main {
     public static void main(String[] args) {
         Solution s = new Solution();
-        s.longestConsecutive(new int[]{2,4,7,1,3,2});
+        s.longestConsecutive(new int[]{2,4,3,3,5,1,3,2});
     }
 }
