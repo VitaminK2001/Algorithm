@@ -28,18 +28,37 @@ void insertionsort2(vector<int>& arr, int n) {
     }
 }
 
-// 快速排序 排枢纽 注意pivot等于right先找大于等于 pivot等于left先找小于等于
-void quicksort(int arr[], int left, int right) {
-    // 注意递归函数的终止条件是当只剩下一个元素的时候不拆分
+/*  不论pivot是从左边开始还是从右边开始 都要考虑一点 异端指针先行
+    因为可能存在一种情况就是 对于pivot而言已经有序 如果是pivot端指针先行，则最后交换的结果反而会打乱顺序
+    而且右指针找小于的数 左指针找大于的数 
+    小于的反面是大于等于 所以右指针是跳过大于等于的数
+    大于的反面是小于等于 所以左指针是跳过小于等于的数 */
+ void quicksort_with_leftPivot(int arr[], int left, int right) {
     if(left >= right) return ;
-    int pivot = right;
-    // 注意需要保留排序的区间开始和结束的下标
+    int pivot = left;
     int start = left;
     int end = right;
     while(left < right) {
-        // 因为pivot = right 所以首先找大于等于pivot的数字 即小于pivot数 直接跳过
-        // 这样left停下来的位置就是大于等于的数字，即使right没找到小于的数字，
-        // right和left碰头后 left和 pivot交换之后 大于pivot的数也正确的移动到pivot的右边
+        while(left < right && arr[right] >= arr[pivot]) {
+            right--;
+        }
+        while(left < right && arr[left] <= arr[pivot]) {
+            left++;
+        }
+        swap(arr[left], arr[right]);
+    }
+    swap(arr[left], arr[pivot]);
+    quicksort_with_leftPivot(arr, start, left-1);
+    quicksort_with_leftPivot(arr, left+1, end);
+ }
+
+void quicksort_with_rightPivot(int arr[], int left, int right) {
+    // 注意递归函数的终止条件是当只剩下一个元素的时候不拆分
+    if(left >= right) return ;
+    int pivot = right;
+    int start = left;
+    int end = right;
+    while(left < right) {
         while(left < right && arr[left] < arr[pivot]) { 
             left++;
         }
@@ -50,8 +69,8 @@ void quicksort(int arr[], int left, int right) {
     }
     swap(arr[left], arr[pivot]);
 
-    quicksort(arr, start, left-1);
-    quicksort(arr, left+1, end);
+    quicksort_with_rightPivot(arr, start, left-1);
+    quicksort_with_rightPivot(arr, left+1, end);
 }
 
 // 冒泡排序 从后往前 每次将最大的挪到最后面
@@ -183,8 +202,10 @@ void shellsort2(vector<int>& arr, int n) {
 
 
 int main() {
-    vector<int> arr = {5, 2, 8, 4, 7, 1, 9, 3, 10, 6, 22, 41, 27, 35, 60, 22, 33, 87};
-    int n = arr.size();
+    vector<int> nums = {5, 2, 8, 4, 7, 1, 9, 3, 10, 6, 22, 41, 27, 35, 60, 22, 33, 87};
+    int n = nums.size();        
+    int arr[nums.size()];
+    std::copy(nums.begin(), nums.end(), arr);
 
     // 打印原始数组
     cout << "Original array: ";
@@ -193,7 +214,8 @@ int main() {
     }
     cout << endl;
 
-    insertionsort2(arr, n);
+    
+    quicksort_with_leftPivot(arr, 0, n-1);
 
     // 打印排序后的数组
     cout << "Sorted array: ";
