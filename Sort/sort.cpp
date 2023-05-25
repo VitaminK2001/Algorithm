@@ -59,7 +59,7 @@ void quicksort_with_rightPivot(int arr[], int left, int right) {
     int start = left;
     int end = right;
     while(left < right) {
-        while(left < right && arr[left] < arr[pivot]) { 
+        while(left < right && arr[left] <= arr[pivot]) { 
             left++;
         }
         while(left < right && arr[right] >= arr[pivot]) {
@@ -215,7 +215,7 @@ int main() {
     cout << endl;
 
     
-    quicksort_with_leftPivot(arr, 0, n-1);
+    quicksort_with_rightPivot(arr, 0, n-1);
 
     // 打印排序后的数组
     cout << "Sorted array: ";

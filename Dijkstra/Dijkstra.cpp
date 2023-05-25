@@ -3,11 +3,11 @@
 #include <queue>
 using namespace std;
 
-struct Edge{
+struct Edge{ // 另一端点被 this 隐含
     int v;
     int weight;
 };
-typedef vector<vector<Edge> > Graph;
+typedef vector<vector<Edge> > Graph; // 每个点都有一个边所构成的集合
 
 typedef pair<int, int> Node;
 
@@ -17,6 +17,7 @@ vector<int> dijkstra(const Graph& graph, int source) {
     vector<int> dist(n, INT_MAX);
     vector<bool> visit(n, false);
 
+    // 优先队列存储的是节点，和源点距离近的结点靠队头
     priority_queue<Node, vector<Node>, greater<Node> > pq;
 
     dist[source] = 0;
@@ -33,6 +34,7 @@ vector<int> dijkstra(const Graph& graph, int source) {
         }
         visit[u] = true;
 
+        // 每次确定一个点的所有边所连的点距离原点的距离 （因为都是正边，三角形的两边之和大于第三边 所以一轮即可确定）
         for(const Edge& edge : graph[u]) {
             int v = edge.v;
             int weight = edge.weight;

@@ -52,6 +52,49 @@ public:
             }
         }
     }
+    void MorrisInOrderTravesal(TreeNode *root) {
+        TreeNode *cur = root;
+        while(cur != nullptr) {
+            if(cur->left == nullptr) {
+                cout << cur->val << " ";
+                cur = cur->right;
+            }else {
+                TreeNode *node = cur->left;
+                while(node->right != nullptr && node->right != cur) {
+                    node = node->right;
+                }
+                if(node->right == nullptr) {
+                    node->right = cur;
+                    node = node->left;
+                }else {
+                    
+                }
+            }
+        }
+    }
+
+    void MorrisPreOrderTraversal(TreeNode *root) {
+        TreeNode *cur = root;
+        while(cur != nullptr) {
+            if(cur->left == nullptr) {
+                cout << cur->val << endl;
+                cur = cur->right;
+            }else {
+                TreeNode *node = cur->left;
+                while(node->right != nullptr && node->right != cur) {
+                    node = node->right;
+                }
+                if(node->right == nullptr) {
+                    cout << cur->val << endl;
+                    node->right = cur;
+                    cur = cur->left;
+                }else {
+                    node->right = nullptr;
+                    cur = cur->right;
+                }
+            }
+        }
+    }
 
     // 本题中的要求是反向中序遍历二叉搜索树 
     // 因为要将大于等于当前节点的点先遍历 并求和，才能知道当前节点应该赋值为多少
