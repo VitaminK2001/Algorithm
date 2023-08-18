@@ -6,6 +6,8 @@ using namespace std;
 int depth = 0;
 int res = 0;
 
+/* 递归算法 求二叉树的深度 */
+
 int traverse(TreeNode* root) {
     if(root == nullptr) return 0;
     depth++;

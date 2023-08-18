@@ -67,5 +67,6 @@
         "set": "cpp",
         "map": "cpp",
         "stack": "cpp"
-    }
+    },
+    "java.debug.settings.onBuildFailureProceed": true
 }

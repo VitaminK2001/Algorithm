@@ -17,6 +17,7 @@ int main() {
         mx = max(mx, a[i]);
     }
     int t = 1;
+    // 将左右相等的数看做一个整体
     for(int i = 1; i <= n; ++i) {
         if(a[i] == a[i-1]) continue;
         a[t++] = a[i];

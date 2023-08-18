@@ -5,6 +5,27 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
+            "projectName": "Algorithm_9f22952f"
+        },
+        {
+            "type": "java",
+            "name": "Son",
+            "request": "launch",
+            "mainClass": "Son",
+            "projectName": "Algorithm_9f22952f"
+        },
+        {
+            "type": "java",
+            "name": "TestExtends",
+            "request": "launch",
+            "mainClass": "TestExtends",
+            "projectName": "Algorithm_9f22952f"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
             "projectName": "Coding_3602daaa"
         },
         {

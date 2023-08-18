@@ -3,7 +3,10 @@
 #include <queue>
 #include "TreeNode.cpp"
 using namespace std;
-
+/*
+    author: vchici
+    通过非递归方法三种遍历二叉树 + 层序遍历二叉树
+*/
 class Traversal{
 public:
     void preOrder(TreeNode* root) {
@@ -35,7 +38,7 @@ public:
                 st.pop();
                 cout << n->val << " ";
                 // 访问完根节点以后，再遍历右子树
-                n = n->right;  
+                n = n->right;
             }
         }
     }
@@ -73,6 +76,27 @@ public:
             }
         }
     }
+
+    // 自下而上 自右向左遍历二叉树
+    void backwards_levelTraversal(TreeNode* root){
+        if(root == nullptr) return ;
+        queue<TreeNode*> q;
+        stack<TreeNode*> st;
+        q.push(root);
+        while(!q.empty()) {
+            TreeNode* n = q.front();
+            q.pop();
+            st.push(n);
+            if(n->left != nullptr) q.push(n->left);
+            if(n->right != nullptr) q.push(n->right);
+        }
+        while(!st.empty()) {
+            TreeNode* cur = st.top();
+            st.pop();
+            cout << cur->val << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main() {
@@ -101,6 +125,10 @@ int main() {
     solution.levelTraversal(root);
     cout << endl;
 
+    cout << "反层次遍历结果为: ";
+    solution.backwards_levelTraversal(root);
+    cout << endl;
+
     return 0;
 }
 
@@ -108,3 +136,4 @@ int main() {
 // 中序遍历结果为：4 2 5 1 3 6 
 // 后序遍历结果为：6 3 5 4 2 1 
 // 层次遍历结果为：1 2 3 4 5 6 
+// 反层次遍历结果为: 6 5 4 3 2 1 
