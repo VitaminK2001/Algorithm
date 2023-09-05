@@ -153,26 +153,27 @@ void heapify(vector<int>& arr, int heapsize, int i) {
     }
     if(largest != i) { // 注意如果是左右没有子节点 或者 就是本身最大，则不需要换
         swap(arr[i], arr[largest]);
-        heapify(arr, heapsize, largest);
+        heapify(arr, heapsize, largest); // 换了之后largest位置有变动，要接着往下换
     }
 }
 
 void buildheap(vector<int>& arr, int heapsize) {
-    int n = heapsize / 2; //最后一个非叶子节点
-    for(int i = n; i >= 0; --i) {
+    int n = heapsize / 2; // 最后一个非叶子节点（/2取整是下限）
+    for(int i = n; i >= 0; --i) { // 从最后一个非叶子节点开始，往上直到根节点
         heapify(arr, heapsize, i);
     }
 }
 
 void heapsort(vector<int>& arr, int heapsize) {
     buildheap(arr, heapsize);
-    for(int i = heapsize-1; i >= 1; --i) { // 如果i=0的时候就没必要和自己本身在换一次了
+    for(int i = heapsize-1; i >= 1; --i) { // 每次都是最后一个元素和第一个元素交换（大根堆）
         swap(arr[i], arr[0]);
         heapify(arr, i, 0);
     }
 }
 
 /* 希尔排序法 */
+/* 构造一个gap gap从大变小最后变成1*/
 void shellsort(vector<int>& arr, int n) {
     for(int gap = n / 2; gap > 0; gap /= 2) { // gap终究变成1
         for(int i = gap; i < n; ++i) {

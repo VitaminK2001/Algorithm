@@ -10,7 +10,7 @@ void printList(int a[], int n) {
 
 int main() {
     /*              静态数组               */
-    int a1[3]; // 1 58395696 1 
+    int a1[3]; // 随机生成三个数
     cout << "a1 : " << endl;
     printList(a1, 3);
 
@@ -32,9 +32,10 @@ int main() {
     /*                 动态数组                */ 
     int num = 10;
     int arr0[num]; // 可以这样声明
+    // int arr0[num] = {}; // 不能这样初始化以变量为长度的数组
     cout << "arr0 : " << endl;
     printList(arr0, num); // -1207623408 32759 132841545 1 3 3 -1207623224 32759 -1207623392 32759 
-    // int arr0[num] = {}; // 不能这样初始化以变量为长度的数组
+    
     
 
     /*                 malloc 动态申请一维数组                 */ 
