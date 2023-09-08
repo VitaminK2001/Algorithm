@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
+
+/* 从起始节点到图中所有其他节点的最短路径 */
+
 struct Edge{
     int from;
     int to;

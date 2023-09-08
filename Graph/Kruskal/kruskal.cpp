@@ -9,7 +9,7 @@ public:
 
 class Graph{
 public:
-    int V, E;
+    int V, E; // 点的数量、边的数量
     vector<Edge> edges;
 };
 
@@ -54,7 +54,7 @@ void Kruskal(Graph graph) {
         subsets[i].rank = 0;
     }
     int e = 0, i = 0; 
-    while(e < V-1 && i < graph.E) {
+    while(e < V-1 && i < graph.E) { // 遍历所有节点，选出V-1条边，这v-1条边的两个顶点不能通过某条路径相连
         Edge next_edge = graph.edges[i++];
         int x = find(subsets, next_edge.src);
         int y = find(subsets, next_edge.dest);

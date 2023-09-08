@@ -9,6 +9,7 @@ struct Edge{ // 另一端点被 this 隐含
 };
 typedef vector<vector<Edge> > Graph; // 每个点都有一个边所构成的集合
 
+// 存储不同节点距离源点的距离
 typedef pair<int, int> Node;
 
 vector<int> dijkstra(const Graph& graph, int source) {
@@ -18,6 +19,7 @@ vector<int> dijkstra(const Graph& graph, int source) {
     vector<bool> visit(n, false);
 
     // 优先队列存储的是节点，和源点距离近的结点靠队头
+    // greater lesser 默认是第一个比较大小排序，greater是升序
     priority_queue<Node, vector<Node>, greater<Node> > pq;
 
     dist[source] = 0;
@@ -39,6 +41,7 @@ vector<int> dijkstra(const Graph& graph, int source) {
             int v = edge.v;
             int weight = edge.weight;
 
+            // 源点到u的距离 + u到v的距离 < 源点到v的距离
             if(dist[u] + weight < dist[v]) {
                 dist[v] = dist[u] + weight;
                 pq.push(make_pair(dist[v], v));

@@ -1,7 +1,10 @@
-#include<iostream>
+#include <iostream>
 #include <vector>
+#include <algorithm> // lower_bound & upper_bound
 using namespace std;
 // 找大于等于这个数的第一个位置和大于等于这个数的最后一个位置
+// 手动寻找上界下界
+
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -13,7 +16,7 @@ public:
         else ans.push_back(first-nums.begin());
         auto second = upper_bound(nums.begin(), nums.end(), target);
         if(*(second-1) == target) {
-            ans.push_back(second-nums.begin()-1);
+            ans.push_back(second-1-nums.begin());
         }else {
             return vector<int>{-1,-1};
         }
@@ -28,13 +31,13 @@ class Solution2 {
         int l = 0, r = nums.size(), mid = 0;
         while(l < r) {
             mid = (l + r) / 2;
-            if(nums[mid] < target) {
+            if(nums[mid] < target) { // 小于的一概不要
                 l = mid+1;
-            }else {
+            }else { // 大于等于的可以保留
                 r = mid; 
             }
         }
-        // l就是第一个大于等于的位置
+        // l最终是第一个大于等于的位置
         if(l == nums.size() || nums[l] != target) return vector<int>{-1,-1};
         else ans.push_back(l);
 
@@ -42,9 +45,9 @@ class Solution2 {
         l = 0, r = nums.size(), mid = 0;
         while(l < r) {
             mid = (l + r) / 2;
-            if(nums[mid] <= target) {
+            if(nums[mid] <= target) { // 小于等于的一概不要
                 l = mid+1;
-            }else {
+            }else { // 大于的可以保留
                 r = mid;
             }
         }

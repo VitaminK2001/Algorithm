@@ -1,3 +1,4 @@
+package longestConsecutive;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ class Solution {
                 int curLen = left + right + 1;
                 ans = Math.max(ans, curLen);
                 // 将num加入map中，表示已经遍历过该值。其对应的value可以为任意值。
-                map.put(num, -1); // 中间的数无所谓 最重要的是区间端点的数
+                map.put(num, -1); // 中间的数无所谓 只要有记录表示遍历过就行
                 // 更新当前连续区间左边界和右边界对应的区间长度
                 map.put(num - left, curLen); // 当他左边没有数的时候 num就是区间的左端点
                 map.put(num + right, curLen); // 当他右边没有数的时候 num就是区间的右端点

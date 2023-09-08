@@ -2,6 +2,9 @@
 #include <vector>
 using namespace std;
 
+// https://leetcode.cn/problems/longest-increasing-subsequence/
+// 二分查找的变形，找第一个大于等于的位置插入
+
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
@@ -16,10 +19,11 @@ public:
                 int mid = (left + right) >> 1;
                 if(tail[mid] < num) {
                     left = mid+1;
-                }else {
+                } else {
                     right = mid;
                 }
             }
+            // left就是第一个大于等于的位置
             tail[left] = num;
             if(res == right) res++;
         }

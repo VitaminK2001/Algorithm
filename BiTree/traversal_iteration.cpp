@@ -33,7 +33,7 @@ public:
                 st.push(n);
                 n = n->left;
             }else {
-                // 说面左子树已经遍历完，可以访问
+                // 说明左子树已经遍历完，可以访问
                 n = st.top();
                 st.pop();
                 cout << n->val << " ";
