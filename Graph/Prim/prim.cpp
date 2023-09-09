@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+// O(V^2) 适合边稠密图
 
 using namespace std;
 
