@@ -41,9 +41,9 @@ public:
                 while(pre->right != nullptr && pre->right != node) { // 如果已经遍历到最右边的结点 或者 遍历到当前节点（已经线索化了） 就跳出循环
                     pre = pre->right;
                 }
-                if(pre->right == NULL) { //如果已经是最右边的结点
+                if(pre->right == NULL) { // 如果已经是最右边的结点
                     pre->right = node;   // 线索化
-                    node = node->left;  // 往左子树的方向走
+                    node = node->left;   // 往左子树的方向走
                 }else { // 如果已经线索化了
                     pre->right = nullptr; // 恢复树的形状(因为当前节点的整个左子树已经遍历完)
                     cout << node->val << " "; // 遍历当前节点

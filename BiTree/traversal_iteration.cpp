@@ -27,7 +27,7 @@ public:
         stack<TreeNode*> st;
         TreeNode* n = root;
         while(!st.empty() || n != nullptr) {
-            if(n != nullptr) { // 重点注意:不能判断n->left != nullptr 因为n可能为空
+            if(n != nullptr) { // 重点注意:不能写n->left != nullptr 因为n可能为空
                 // 说明左子树还没有遍历完，不能访问
                 // 不能访问也就是指不能pop 只能push(遍历)
                 st.push(n);
