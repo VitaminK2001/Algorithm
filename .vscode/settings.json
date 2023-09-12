@@ -66,7 +66,8 @@
         "list": "cpp",
         "set": "cpp",
         "map": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "queue": "cpp"
     },
     "java.debug.settings.onBuildFailureProceed": true
 }
