@@ -19,7 +19,7 @@ vector<int> dijkstra(const Graph& graph, int source) {
     vector<bool> visit(n, false);
 
     // 优先队列存储的是节点，和源点距离近的结点靠队头
-    // greater lesser 默认是第一个比较大小排序，greater是升序
+    // greater less 默认是第一个比较大小排序，greater是升序
     priority_queue<Node, vector<Node>, greater<Node> > pq;
 
     dist[source] = 0;
