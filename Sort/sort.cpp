@@ -28,17 +28,18 @@ void insertionsort2(vector<int>& arr, int n) {
     }
 }
 
-/*  不论pivot是从左边开始还是从右边开始 都要考虑一点 异端指针先行
-    因为可能存在一种情况就是 对于pivot而言已经有序 如果是pivot端指针先行，则最后交换的结果反而会打乱顺序
-    而且右指针找小于的数 左指针找大于的数 
-    小于的反面是大于等于 所以右指针是跳过大于等于的数
-    大于的反面是小于等于 所以左指针是跳过小于等于的数 */
+/*  不论pivot是从左边开始还是从右边开始 都要考虑一点 异端指针先行 */
  void quicksort_with_leftPivot(int arr[], int left, int right) {
     if(left >= right) return ;
     int pivot = left;
     int start = left;
     int end = right;
     while(left < right) {
+        // 因为pivot选左端的数，最后要换只可能比原来更靠右，也就是说，和pivot换位置的数一定要小于等于pivot
+        // 所以右端指针先行，right停下来的位置是小于pivot的数，或者和left重合（此时left没动就是pivot的位置）
+        // 所以先移动right最后停下来的位置就是小于等于pivot的位置
+        // 但是如果先移动left
+        // 最后停下来的位置可能是大于pivot的位置
         while(left < right && arr[right] >= arr[pivot]) {
             right--;
         }
@@ -215,7 +216,7 @@ int main() {
     }
     cout << endl;
 
-    
+      
     quicksort_with_rightPivot(arr, 0, n-1);
 
     // 打印排序后的数组
